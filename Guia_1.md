@@ -69,10 +69,16 @@ https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 ----------------------------------------------------
 ----------------------------------------------------
 
-# Como recuperar transactions?
- - Get last block number;
- - Iterar sob blocos ate ultimo
- - Ir retirando transactions dos blocks
+# TODO
+
+- verificar se ja votou (validacao)
+- facilitar votos (args consola)
+- hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap?
+- proxy (X segundos)
+- contador (fim)
+
+ID: pode votar? ja votou?
+Vote: assert endereco proxy
 
 
 
