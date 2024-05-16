@@ -71,11 +71,13 @@ https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 - facilitar votos (args consola)-- 
 - hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap? -- CHECK
 - automatizar address do smart contract -- CHECK
-- proxy (X segundos)
+
+- proxy (X segundos):
+    Agora: Execute por ordem ids e votos
+    Futuro: Sincronizar transacoes tanto IDs como Votos, para nao haver collisions
 - contador (fim)
 
-ID: pode votar? ja votou?
-Vote: assert endereco proxy
+
 
 # Atencao
 - ligacao ao smart contract necessita ABI do mesmo

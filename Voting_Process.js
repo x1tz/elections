@@ -21,8 +21,6 @@ const contractBytecode = contractJson.data.bytecode.object
 const web3 = new Web3(new Web3.providers.HttpProvider(host));
 
 
-//const deployedContractAddress = "0xBca0fDc68d9b21b5bfB16D784389807017B2bbbc"
-
 async function find_SC_Adress(){
   const blockNumber = await web3.eth.getBlockNumber(); //Get most recent block number
   var foundSC = false;
@@ -66,12 +64,12 @@ async function getIdsLength(provider, deployedContractAbi, deployedContractAddre
 }
 
 
-// You need to use the accountAddress details provided to Quorum to send/interact with contracts
-async function registerVoteAtAddress(vote){
-    await proxy.send_to_proxy(vote);
+// send_to_proxy checks for 3 votes when is called! 
+async function registerVoteAtAddress(deployedContractAddress, deployedContractAbi, provider, wallet, vote){
+    return await proxy.send_to_proxy(deployedContractAddress, deployedContractAbi, provider, wallet, vote);
 }
 
-async function registerIdAtAddress(provider, wallet, deployedContractAbi, deployedContractAddress, id){
+async function registerIdAtAddress(deployedContractAddress, deployedContractAbi, provider, wallet, id){
   const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
   const contractWithSigner = contract.connect(wallet);
 
@@ -80,18 +78,17 @@ async function registerIdAtAddress(provider, wallet, deployedContractAbi, deploy
     console.log("ID Eligible: Accepted");
     const tx2 = await contractWithSigner.addId(id);
     await tx2.wait();
+    console.log("Network: added ID: " + tx2);
     return true;
   }
   else if(tx1 == 0){
     console.log("Voter ID is not eligible")
     return false;
   } 
-  else if (tx1 == 2){}
-    //const tx2 = await contractWithSigner.addId(id);
-    // verify the updated value
-    //await tx2.wait();
+  else if (tx1 == 2){
     console.log("User already voted!");
     return false;
+  }
 }
 
 function readAndParseTxtFile(filePath) {
@@ -114,8 +111,6 @@ function readAndParseTxtFile(filePath) {
   }
 }
 
-
-
 async function main(){
 
     const sc_address = await find_SC_Adress();
@@ -125,38 +120,28 @@ async function main(){
     const wallet = new ethers.Wallet(accountPrivateKey, provider);
 
     //IDS & Votes Examples
-    const ids = ["hugo","paulo","dino","vinicius","joao"]; //,"guilherme","ana","jose","ines","beatriz" podem ou nao ser iguais aos autorizados
-    const votes= [1,2,3,1,1];
+    const ids = ["hugo","paulo","dino","vinicius","joao", "guilherme"]; //,"ana","jose","ines","beatriz" podem ou nao ser iguais aos autorizados
+    const votes= [1,2,3,1,1,2];
 
-    //"Turn ON" Proxy 
-    proxy.Start(sc_address, contractAbi, provider, wallet);
+    // "Turn ON" Proxy asynchronously
+    //proxy.Start(sc_address, contractAbi, provider, wallet);
 
     for(let i=0; i<ids.length;i++){
       var vote = votes[i];
       var id = ids[i];
 
-
       //TODO: Read from console ID and Vote... HERE -------------------------------------------
       // Postman??
 
       console.log("addId() function to register the id... " );
-      const canVote = await registerIdAtAddress(provider, wallet, contractAbi, sc_address, id);
+      const canVote = await registerIdAtAddress(sc_address, contractAbi, provider, wallet, id);
       console.log("addVote() function to register the vote... " );
       if(canVote){
-        registerVoteAtAddress(vote);
+        await registerVoteAtAddress(sc_address, contractAbi, provider, wallet, vote);
       }
-      
-
-
-      //console.log("Verify the value was registered in the list .. " )
-      //console.log("Read the current contract's Votes list length .. " )
-      await getVotesLength(provider, contractAbi, sc_address);
-      //console.log("Read the current contract's Ids list length .. " )
-      await getIdsLength(provider, contractAbi, sc_address);
-      // await getAllPastEvents(host, contractAbi, tx.contractAddress);
     }
-  proxy.Stop();
-  console.log("Proxy stopped...");
+  //proxy.Stop();
+  //console.log("Proxy stopped...");
 }
 
 if (require.main === module) {
