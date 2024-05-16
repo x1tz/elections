@@ -8,12 +8,25 @@ contract electionsSC{
   uint[] public votes; //Candidate A -> 1, Candidate B -> 2, Candidate C ->3
 
   // Mapping to store candidate names and their vote counts
-  mapping(string => uint) public eligibleVoters; //0 -> nao eligivel, 1-> eligivel, 2-> casted vote
+  mapping(string => uint) public eligibleVoters; //0 -> nao eligivel, 1-> eligivel, 2-> added to blockchain
 
-  // Function to add a string to the list addItem
+  //TODO: Adicionar lista de elegible voters ao eligibleVoters hahsmap
+
+  // Initialize mapping with eligible voters list
+  // WARNING: Only execute 1 time at start of system
+  function initializeVotersList(string[] memory keys) public{
+    for(uint i=0; i < keys.length; i++){
+        eligibleVoters[keys[i]] = 1;
+    }
+  }
+
+  // Function to check the id
+  function checkId(string memory id) public view returns (uint) {
+    return eligibleVoters[id];
+  }
+ 
+  // Function to add an id to list
   function addId(string memory id) public {
-
-    //CHECK IF ID IS ELEGIBLE && CHECK IF ID HAS VOTED
     if(eligibleVoters[id] == 1){
         ids.push(id); //list
         eligibleVoters[id] = 2; //map

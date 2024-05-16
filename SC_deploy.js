@@ -15,11 +15,6 @@ const contractJson = JSON.parse(fs.readFileSync(contractJsonPath));
 const contractAbi = contractJson.abi;
 const contractBytecode = contractJson.data.bytecode.object
 
-//Vote String
-var vote = "Candidate A";
-
-
-
 async function createContract(provider, wallet, contractAbi, contractByteCode) {
   const factory = new ethers.ContractFactory(contractAbi, contractByteCode, wallet);
   const contract = await factory.deploy();
@@ -28,6 +23,7 @@ async function createContract(provider, wallet, contractAbi, contractByteCode) {
   //The contract is deployed now
   return contract
 };
+
 
 async function main(){
   const provider = new ethers.JsonRpcProvider(host);
@@ -39,6 +35,7 @@ async function main(){
     console.log("Contract deployed at address: " + contractAddress);
   })
   .catch(console.error);
+
 
 }
 

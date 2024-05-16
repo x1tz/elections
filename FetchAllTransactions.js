@@ -1,7 +1,11 @@
 const Web3 = require('web3');
 
+const { besu } = require("../keys.js");
+const host = besu.rpcnode.url;
+
 // Replace with your Quorum node provider URL
-const providerUrl = 'http://localhost:8545';
+const providerUrl = 'http://localhost:8545'; //host
+
 
 // Create a Web3 instance connected to your node
 const web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
@@ -38,7 +42,7 @@ async function printTx(){
 //async makes rest of code to wait for getAllTransactions()
 (async () => {
     await getAllTransactions();
-    console.log(myTransactionsList); //Print all transactions retrieved
+    console.log("Lista Transacoes: /n" + myTransactionsList); //Print all transactions retrieved
     printTx();
 })();
 

@@ -1,0 +1,10 @@
+hugo,1
+paulo,2
+dino,3
+vinicius,1
+joao,2 
+vasco,3
+ana,1
+jose,1
+ines,1
+beatriz,2

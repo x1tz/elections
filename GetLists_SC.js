@@ -8,8 +8,14 @@ const { register } = require('module');
 const host = besu.rpcnode.url;
 const accountPrivateKey = besu.rpcnode.accountPrivateKey;
 
-const deployedContractAddress = "0xBca0fDc68d9b21b5bfB16D784389807017B2bbbc"; // Replace with actual address
+// abi and bytecode generated from electionsSC.sol:
+// > solcjs --bin --abi electionsSC.sol
+const contractJsonPath = path.resolve(__dirname, '../../','contracts','electionsSC.json');
+const contractJson = JSON.parse(fs.readFileSync(contractJsonPath));
+const contractAbi = contractJson.abi;
+const contractBytecode = contractJson.data.bytecode.object
 
+const deployedContractAddress = "0xBca0fDc68d9b21b5bfB16D784389807017B2bbbc"; // Replace with actual address
 
 async function getVotesList(provider, deployedContractAbi, deployedContractAddress){
   const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);

@@ -63,22 +63,31 @@ IMAGENS - https://besu.hyperledger.org/private-networks/how-to/monitor/chainlens
 https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 
 
-
-
-
 ----------------------------------------------------
 ----------------------------------------------------
 
 # TODO
-
-- verificar se ja votou (validacao)
-- facilitar votos (args consola)
-- hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap?
+- verificar se ja votou (validacao) -- CHECK
+- facilitar votos (args consola)-- 
+- hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap? -- CHECK
+- automatizar address do smart contract -- CHECK
 - proxy (X segundos)
 - contador (fim)
 
 ID: pode votar? ja votou?
 Vote: assert endereco proxy
+
+# Atencao
+- ligacao ao smart contract necessita ABI do mesmo
+
+# Ordem sistema
+- Deploy SC
+- Inicializar lista de eligible voters
+- Verificar ID votador
+- Adicionar ID votador
+- Enviar Vote Proxy
+- Proxy envia Vote para blockchain
+- Contador
 
 
 
@@ -105,3 +114,4 @@ Vote: assert endereco proxy
 # Instalacoes feitas
 - installing ethereum/solidity (brew and npm)
 - npm install web3
+- npm install fs-extra
