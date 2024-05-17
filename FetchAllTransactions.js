@@ -29,6 +29,7 @@ async function getAllTransactions() {
             }
         }
     }
+    return myTransactionsList;
     //console.log(myTransactionsList);
 }
 
@@ -39,12 +40,13 @@ async function printTx(){
     }
 }
 
-//async makes rest of code to wait for getAllTransactions()
+/*
 (async () => {
     await getAllTransactions();
     console.log("Lista Transacoes: /n" + myTransactionsList); //Print all transactions retrieved
     printTx();
 })();
+*/
 
 
-
+module.exports.getAllTransactions = getAllTransactions; 

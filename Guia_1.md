@@ -68,14 +68,14 @@ https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 
 # TODO
 - verificar se ja votou (validacao) -- CHECK
-- facilitar votos (args consola)-- 
+- facilitar votos (args consola/postman)-- todo
 - hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap? -- CHECK
 - automatizar address do smart contract -- CHECK
 
 - proxy (X segundos):
     Agora: Execute por ordem ids e votos
-    Futuro: Sincronizar transacoes tanto IDs como Votos, para nao haver collisions
-- contador (fim)
+    Futuro: Sincronizar transacoes tanto IDs como Votos, para nao haver collisions -- todo
+- contador (fim) -- CHECK
 
 
 
@@ -117,3 +117,4 @@ https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 - installing ethereum/solidity (brew and npm)
 - npm install web3
 - npm install fs-extra
+- npm ethereum-input-data-decoder
