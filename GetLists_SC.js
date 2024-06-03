@@ -36,13 +36,15 @@ async function main(){
   const provider = new ethers.JsonRpcProvider(host);
   const wallet = new ethers.Wallet(accountPrivateKey, provider);
 
-    
-    console.log("Use the smart contracts 'get' function to get the list of votes .. " )
+    try{
+    //console.log("Use the smart contracts 'get' function to get the list of votes .. " )
     await getVotesList(provider, contractAbi, deployedContractAddress);
 
-    console.log("Use the smart contracts 'get' function to get the list of ids .. " )
+    //console.log("Use the smart contracts 'get' function to get the list of ids .. " )
     await getIdsList(provider, contractAbi, deployedContractAddress);
-
+    }catch(error){
+      console.error("ERROR: Cannot access lists, SC status is not 'Couting'!");
+    }
     // await getAllPastEvents(host, contractAbi, tx.contractAddress);
 
 }

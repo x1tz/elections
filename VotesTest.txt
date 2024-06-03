@@ -3,8 +3,10 @@ paulo,2
 dino,3
 vinicius,1
 joao,2 
-vasco,3
-ana,1
-jose,1
+NAOESTA,3
+ana,9
+jose,7
 ines,1
-beatriz,2
+beatriz,1
+vasco,1
+

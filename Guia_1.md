@@ -63,19 +63,52 @@ IMAGENS - https://besu.hyperledger.org/private-networks/how-to/monitor/chainlens
 https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 
 
+assert vs require
+
 ----------------------------------------------------
+----------------- TO DOS ---------------------------
 ----------------------------------------------------
 
-# TODO
+# TODO - DONE
 - verificar se ja votou (validacao) -- CHECK
 - facilitar votos (args consola/postman)-- todo
 - hashmap votadores (hashs), ter lista no script e envir como arg para um initializer da hashmap? -- CHECK
 - automatizar address do smart contract -- CHECK
-
 - proxy (X segundos):
     Agora: Execute por ordem ids e votos
     Futuro: Sincronizar transacoes tanto IDs como Votos, para nao haver collisions -- todo
 - contador (fim) -- CHECK
+
+# 17/05 
+- assert / require no addID(); -- CHECK
+- random() no shuffle revisto; -- CHECK
+- leitura do txt file ids e votos; -- CHECK
+- Counter candidatos validos (resto Blank Vote); -- CHECK
+- status SC(mudar status tem logica em comentario para debug) -- CHECK
+Criar file para mudar status em vez de no codigo
+
+# DOING:
+- proxy checkar 1 em 1seg setInterval a list e assim consegue receber msg do parent?
+
+# Current State: 
+Faz a votacao, enquanto faz process de 3 continua a receber votos. faz o timeout no ultimo voto q sobra. dps disso
+fica preso pois nao termina a child note.
+- problem: arranjar maneira de terminar child node no fim dps de ela processar ultimo voto
+    (main -> child ( electionsENDED), flag no child vira true e espera acabar processamento, manda ok para main e mata child.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,3 +151,5 @@ https://bia.is/tools/abi-decoder/ (usar abi do SC e input da tx)
 - npm install web3
 - npm install fs-extra
 - npm ethereum-input-data-decoder
+- npm install express
+- brew install ...

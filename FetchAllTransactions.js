@@ -34,19 +34,19 @@ async function getAllTransactions() {
 }
 
 //Prints hashes of the transactions found
-async function printTx(){
+/*async function printTx(){
     for(let i=0; i<myTransactionsList.length; i++){
         console.log(myTransactionsList[i].hash);
     }
 }
 
-/*
+
 (async () => {
     await getAllTransactions();
     console.log("Lista Transacoes: /n" + myTransactionsList); //Print all transactions retrieved
     printTx();
-})();
-*/
+})();*/
+
 
 
 module.exports.getAllTransactions = getAllTransactions; 

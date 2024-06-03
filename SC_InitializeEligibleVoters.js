@@ -1,6 +1,8 @@
 const path = require('path');
 const fs = require('fs-extra');
 var ethers = require('ethers');
+const Web3 = require('web3');
+const others = require('./Others.js');
 
 // RPCNODE details
 const { tessera, besu } = require("../keys.js");
@@ -15,11 +17,38 @@ const contractJson = JSON.parse(fs.readFileSync(contractJsonPath));
 const contractAbi = contractJson.abi;
 const contractBytecode = contractJson.data.bytecode.object
 
-const deployedContractAddress = "0xBca0fDc68d9b21b5bfB16D784389807017B2bbbc"
+// Create a Web3 instance connected to your node
+const web3 = new Web3(new Web3.providers.HttpProvider(host));
 
-async function initializeEligibleVoters(provider, wallet, deployedContractAbi, deployedContractAddress, namesList){
-  const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
-  const contractWithSigner = contract.connect(wallet);
+async function find_SC_Adress(){
+  const blockNumber = await web3.eth.getBlockNumber(); //Get most recent block number
+  var foundSC = false;
+  var tx_hash=0;
+  for(let k = 0; k <= blockNumber; k++){
+    const block = await web3.eth.getBlock(k); //Get block object by number
+    const hash = block.hash;
+    const numberTx = await web3.eth.getBlockTransactionCount(hash);
+
+    if(numberTx > 0){
+      for(let i = 0; i < numberTx; i++){
+        const txfound = await web3.eth.getTransactionFromBlock(hash, i);
+        //console.log("found TX" + txfound);
+        if(txfound.to === null){
+          tx_hash = txfound.hash;
+          //console.log(tx_hash);
+          foundSC = true;
+        }
+      }
+    }
+    if(foundSC){
+      break;
+    }
+  }
+  const receipt = await web3.eth.getTransactionReceipt(tx_hash);
+  return receipt.contractAddress;
+}
+
+async function initializeEligibleVoters(contractWithSigner, namesList){
   const tx = await contractWithSigner.initializeVotersList(namesList);
   // verify the updated value
   await tx.wait();
@@ -55,7 +84,16 @@ async function main(){
   const filename = 'VotersIds.txt'; 
   const namesList = readNamesFromFile(filename);
   console.log(namesList);
-  initializeEligibleVoters(provider, wallet, contractAbi, deployedContractAddress, namesList);
+
+  const sc_address = await find_SC_Adress();
+
+  const contract = new ethers.Contract(sc_address, contractAbi, provider);
+  const contractWithSigner = contract.connect(wallet);
+
+  const status = await others.getCurrentStatus(contractWithSigner);
+  console.log("Status: " + status);
+
+  initializeEligibleVoters(contractWithSigner, namesList);
 }
 
 if (require.main === module) {

@@ -3,12 +3,17 @@ const fs = require('fs-extra');
 var ethers = require('ethers');
 const Web3 = require('web3');
 const proxy = require('./Proxy.js');
+const others = require('./Others.js');
+const { fork } = require("child_process");
 
 // RPCNODE details
 const { tessera, besu } = require("../keys.js");
 const { register } = require('module');
 const host = besu.rpcnode.url;
 const accountPrivateKey = besu.rpcnode.accountPrivateKey;
+
+const provider = new ethers.JsonRpcProvider(host);
+const wallet = new ethers.Wallet(accountPrivateKey, provider);
 
 // abi and bytecode generated from electionsSC.sol:
 // > solcjs --bin --abi electionsSC.sol
@@ -65,83 +70,90 @@ async function getIdsLength(provider, deployedContractAbi, deployedContractAddre
 
 
 // send_to_proxy checks for 3 votes when is called! 
-async function registerVoteAtAddress(deployedContractAddress, deployedContractAbi, provider, wallet, vote){
-    return await proxy.send_to_proxy(deployedContractAddress, deployedContractAbi, provider, wallet, vote);
+async function registerVoteAtAddress(child, data){
+  child.send({vote: data});
 }
 
-async function registerIdAtAddress(deployedContractAddress, deployedContractAbi, provider, wallet, id){
-  const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
-  const contractWithSigner = contract.connect(wallet);
-
-  const tx1 = await contractWithSigner.checkId(id);
-  if(tx1 == 1){
-    console.log("ID Eligible: Accepted");
-    const tx2 = await contractWithSigner.addId(id);
-    await tx2.wait();
-    console.log("Network: added ID: " + tx2);
-    return true;
-  }
-  else if(tx1 == 0){
-    console.log("Voter ID is not eligible")
-    return false;
-  } 
-  else if (tx1 == 2){
-    console.log("User already voted!");
-    return false;
-  }
+async function registerIdAtAddress(contractWithSigner, id){
+  const tx2 = await contractWithSigner.addId(id);
+  await tx2.wait();
+  return tx2;
 }
 
-function readAndParseTxtFile(filePath) {
+function readAndParseTxtFile(filename) {
+  const names = [];
+  const numbers = [];
   try {
-      const data = fs.readFileSync(filePath, 'utf8');
-      const lines = data.split('\n');
-      // Variables to store IDs and numbers
-      const ids = [];
-      const numbers = [];
-      lines.forEach(line => {
-          const [id, number] = line.trim().split(',');
-          // Add ID and number to respective arrays
-          ids.push(id);
-          numbers.push(parseInt(number));
-      });
-      return { ids, numbers };
-  } catch (err) {
-      console.error('Error reading or parsing the file:', err);
-      return { ids: [], numbers: [] };
+    const data = fs.readFileSync(filename, 'utf-8');
+    for (const line of data.split(/\r?\n/)) {
+      const parts = line.trim().split(',');
+      if (parts.length === 2) {
+        names.push(parts[0]);
+        numbers.push(parseInt(parts[1], 10)); // Parse string to number (base 10)
+      } else {
+        console.warn(`Skipping invalid line: ${line}`);
+      }
+    }
+  } catch (error) {
+    console.error("Error reading file:", error);
   }
+
+  return [names, numbers];
 }
 
 async function main(){
 
+    //Find SmartContract Address
     const sc_address = await find_SC_Adress();
     console.log("Found SC Address:" + sc_address);
 
-    const provider = new ethers.JsonRpcProvider(host);
-    const wallet = new ethers.Wallet(accountPrivateKey, provider);
+    //Read from test votes file logic
+    const readFile = readAndParseTxtFile("VotesTest.txt");
+    const ids = readFile[0];
+    const votes = readFile[1];
 
-    //IDS & Votes Examples
-    const ids = ["hugo","paulo","dino","vinicius","joao", "guilherme"]; //,"ana","jose","ines","beatriz" podem ou nao ser iguais aos autorizados
-    const votes= [1,2,3,1,1,2];
+    //Smart Contrac with Signer
+    const contract = new ethers.Contract(sc_address, contractAbi, provider);
+    const contractWithSigner = contract.connect(wallet);
 
-    // "Turn ON" Proxy asynchronously
-    //proxy.Start(sc_address, contractAbi, provider, wallet);
+    // "Turn ON" Proxy asynchronously ####################################################################################
+    //Child Process Logic
+    const child = fork("./Proxy.js"); // Fork the worker process 
+
+    child.on("message", (msg) => {
+      console.log("Message from child:", msg);
+    });
+    child.on("error", (err) => {
+      console.error("Child process error:", err);
+    });
+    child.on("close", (code) => {
+      console.log("Child process exited with code:", code);
+    });
+
+
+    //Change Contract Status to Voting
+    const tx_status = await others.statusToVoting(contractWithSigner);
+    await tx_status.wait();
+    console.log("Status: " + tx_status.toString());
 
     for(let i=0; i<ids.length;i++){
       var vote = votes[i];
       var id = ids[i];
-
-      //TODO: Read from console ID and Vote... HERE -------------------------------------------
-      // Postman??
-
-      console.log("addId() function to register the id... " );
-      const canVote = await registerIdAtAddress(sc_address, contractAbi, provider, wallet, id);
-      console.log("addVote() function to register the vote... " );
+      var canVote = false;
+      try{
+        canVote = await registerIdAtAddress(contractWithSigner, id);
+      } catch(error){
+        console.error("ERROR: Voter ID is not eligible to vote...");
+      }
+      //console.log("Can Vote? -> " + canVote);
       if(canVote){
-        await registerVoteAtAddress(sc_address, contractAbi, provider, wallet, vote);
+        await registerVoteAtAddress(child, vote);
       }
     }
-  //proxy.Stop();
-  //console.log("Proxy stopped...");
+  
+  //Send STOP message to child
+  //child.kill("SIGTERM");
+  //console.log("Proxy stopped..."); 
 }
 
 if (require.main === module) {
