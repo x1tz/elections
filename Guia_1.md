@@ -91,10 +91,17 @@ Criar file para mudar status em vez de no codigo
 - proxy checkar 1 em 1seg setInterval a list e assim consegue receber msg do parent?
 
 # Current State: 
-Faz a votacao, enquanto faz process de 3 continua a receber votos. faz o timeout no ultimo voto q sobra. dps disso
-fica preso pois nao termina a child note.
-- problem: arranjar maneira de terminar child node no fim dps de ela processar ultimo voto
-    (main -> child ( electionsENDED), flag no child vira true e espera acabar processamento, manda ok para main e mata child.)
+- Vai buscar votos e manda para proxy (enquanto valida um voto)
+- Apos 3 votos ou 60sec timeout, proxy regista votos na network
+- Se receber sinal STOP, proxy espera acabar processo de registro dos votos que faltam e termina
+
+fastAPI:
+- Ao guardar voto, limpa primeiro a lista
+- quando VotinProcess termina de enviar voto para proxy, limpa lista. (se voto for enviado enquanto VotingProcess
+processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
+
+    # Limitacao:
+
 
 
 

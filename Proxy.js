@@ -2,11 +2,14 @@ const path = require('path');
 const fs = require('fs-extra');
 var ethers = require('ethers');
 const Web3 = require('web3');
+const axios = require('axios'); // Import axios
 
 
 var list = []
 var clock = false;
 var timedout = false;
+
+var to_stop = false;
 
 var processOpen = true;
 
@@ -102,7 +105,7 @@ function timerOn(){
 }
 
 function resetTimer(){
-  timedoutid = setTimeout(timerOn, 40000);
+  timedoutid = setTimeout(timerOn, 60000);
   clock=true;
   return timedoutid;
 }
@@ -115,7 +118,7 @@ async function processVotes(contractWithSigner){
       await tx.wait();
       console.log("Proxy: Registered vote:", tx); // Log the sent transactions
   }
-  
+  processOpen=true;
 }
 
 async function main(){
@@ -129,7 +132,11 @@ async function main(){
 
   //add vote to list
   process.on("message", (msg) => {
-    send_to_proxy(msg.vote);
+    if(msg == "stop"){
+      to_stop = true;
+    } else{
+      send_to_proxy(msg.vote);
+    }
   });
   
   //TIMERS
@@ -139,7 +146,7 @@ async function main(){
       processOpen=false;
       clearTimeout(timeoutId);
       processVotes(contractWithSigner);
-      processOpen=true;
+      //processOpen=true;
       timeoutId = resetTimer();
     }
     else if(timedout){
@@ -147,13 +154,19 @@ async function main(){
         console.log("Proxy: Timedout, emptying votes list...")
         processOpen = false;
         processVotes(contractWithSigner);
-        processOpen=true;
+        //processOpen=true;
       }
       timedout=false;
       timeoutId=resetTimer(); 
     }
+    else if(list.length == 0 && to_stop && processOpen){
+      //TODO: send ok to stop
+      process.exit(0);  
+    }
   }, 2000);
   //Variavel clock inutil?
+
+
 
 }
 

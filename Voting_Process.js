@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 var ethers = require('ethers');
 const Web3 = require('web3');
+const axios = require('axios'); // Import axios
 const proxy = require('./Proxy.js');
 const others = require('./Others.js');
 const { fork } = require("child_process");
@@ -103,6 +104,8 @@ function readAndParseTxtFile(filename) {
 
 async function main(){
 
+    var loop = true;
+
     //Find SmartContract Address
     const sc_address = await find_SC_Adress();
     console.log("Found SC Address:" + sc_address);
@@ -126,9 +129,6 @@ async function main(){
     child.on("error", (err) => {
       console.error("Child process error:", err);
     });
-    child.on("close", (code) => {
-      console.log("Child process exited with code:", code);
-    });
 
 
     //Change Contract Status to Voting
@@ -136,21 +136,50 @@ async function main(){
     await tx_status.wait();
     console.log("Status: " + tx_status.toString());
 
-    for(let i=0; i<ids.length;i++){
-      var vote = votes[i];
-      var id = ids[i];
-      var canVote = false;
-      try{
-        canVote = await registerIdAtAddress(contractWithSigner, id);
-      } catch(error){
-        console.error("ERROR: Voter ID is not eligible to vote...");
-      }
-      //console.log("Can Vote? -> " + canVote);
-      if(canVote){
-        await registerVoteAtAddress(child, vote);
-      }
+    // Loop to receive votes from FastAPI
+  var sent_stop_to_child = false;
+  child.on("close", (code) => {
+    console.log("Child process exited with code:", code);
+    loop = false;
+  });
+  while (loop) {
+    const stop_state = await axios.get('http://localhost:8000/api/stop');
+    //console.log(stop_state.data);
+    if(stop_state.data && !sent_stop_to_child){
+      child.send("stop");
+      console.log("STOP: Proxy will shutdown after processing votes...");
+      sent_stop_to_child = true;
     }
-  
+    try {
+      // Replace with your actual FastAPI endpoint URL and path
+      const response = await axios.get('http://localhost:8000/api/votes');
+      const votes = response.data; // Access vote data from response
+      if(votes.length > 0 ){
+          const vote = votes[0];
+          await axios.put('http://localhost:8000/api/votes'); //remove vote from fastapi 
+          var id = vote.id; // Assuming vote object has an "id" property
+          var canVote = false;
+          try {
+            canVote = await registerIdAtAddress(contractWithSigner, id);
+          } catch(error){
+            console.error("ERROR: Voter ID is not eligible to vote...");
+          }
+          if(canVote){
+            await registerVoteAtAddress(child, vote.choice); // Assuming vote object has a "choice" property
+          }
+          //await axios.put('http://localhost:8000/api/votes'); //remove vote from list
+      }
+      //console.log("Stop State: ", stop_state.data);
+    } catch (error) {
+      console.error("Error fetching votes from FastAPI:", error);
+    }
+
+    // Adjust sleep time based on your requirements (e.g., milliseconds)
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  // ... (code to execute on shutdown - optional)
+
   //Send STOP message to child
   //child.kill("SIGTERM");
   //console.log("Proxy stopped..."); 
