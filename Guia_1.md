@@ -2,6 +2,8 @@
 - IBFT 2.0 Proof of Authority: 
     > Approved accounts, known as validators, validate transactions and blocks. Validators take turns to create the next block. Before inserting the block on the chain, a  super-majority (greater than or equal to 2/3) of validators must first sign the block.
 
+- QBFT
+
 https://besu.hyperledger.org/private-networks/how-to/configure/consensus/ibft
 
 # Comandos Docker Container
@@ -100,7 +102,6 @@ fastAPI:
 - quando VotinProcess termina de enviar voto para proxy, limpa lista. (se voto for enviado enquanto VotingProcess
 processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
 
-    # Limitacao:
 
 
 
@@ -117,6 +118,10 @@ processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
 
 
 
+# Executar
+- FastAPI: fastapi dev eth_api.py
+- Quorum Blockchain: ./run.sh
+- Javascripts: node name.js (SC_deploy, SC_Init ,Voting, Counter)
 
 
 # Atencao

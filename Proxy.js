@@ -75,8 +75,6 @@ async function send_to_network(contractWithSigner, vote){
     const tx = await contractWithSigner.addVote(vote);
     // verify the updated value
     await tx.wait();
-    // const res = await contract.get();
-    // console.log("Obtained value at deployed contract is: "+ res);
     return tx;
 }
 
@@ -146,15 +144,16 @@ async function main(){
       processOpen=false;
       clearTimeout(timeoutId);
       processVotes(contractWithSigner);
-      //processOpen=true;
+      
       timeoutId = resetTimer();
     }
-    else if(timedout){
-      if(list.length > 0 && processOpen){
-        console.log("Proxy: Timedout, emptying votes list...")
+    else if(timedout || to_stop){
+      if((list.length > 0 && processOpen)){
+        console.log("Proxy: Timedout or Stopped Voting, emptying votes list...")
         processOpen = false;
         processVotes(contractWithSigner);
-        //processOpen=true;
+      } else if(to_stop && list.length == 0 && processOpen){
+        process.exit(0);
       }
       timedout=false;
       timeoutId=resetTimer(); 

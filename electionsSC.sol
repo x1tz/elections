@@ -46,12 +46,12 @@ contract electionsSC{
 
 //Functions to change currentStatus(Logic: Init -> Voting -> Counting)
   function statusVoting() public returns (Status){
-    //require(currentStatus == Status.Init || currentStatus,"Contract isn't in Init status");
+    require(currentStatus == Status.Init,"Contract isn't in Init status");
     currentStatus = Status.Voting;
     return currentStatus;
   }
   function statusCounting() public returns (Status){
-    //require(currentStatus == Status.Voting,"Contract isn't in Voting status");
+    require(currentStatus == Status.Voting,"Contract isn't in Voting status");
     currentStatus = Status.Counting;
     return currentStatus;
   }

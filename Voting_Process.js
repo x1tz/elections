@@ -26,7 +26,7 @@ const contractBytecode = contractJson.data.bytecode.object
 // Create a Web3 instance connected to your node
 const web3 = new Web3(new Web3.providers.HttpProvider(host));
 
-
+// Searches and finds Deployed Smart Contract Adress
 async function find_SC_Adress(){
   const blockNumber = await web3.eth.getBlockNumber(); //Get most recent block number
   var foundSC = false;
@@ -55,6 +55,7 @@ async function find_SC_Adress(){
   return receipt.contractAddress;
 }
 
+// Returns SC Votes List Length
 async function getVotesLength(provider, deployedContractAbi, deployedContractAddress){
   const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
   const res = await contract.getVotesLength();
@@ -62,6 +63,7 @@ async function getVotesLength(provider, deployedContractAbi, deployedContractAdd
   return res
 }
 
+// Returns SC IDs List Length
 async function getIdsLength(provider, deployedContractAbi, deployedContractAddress){
   const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
   const res = await contract.getIdsLength();
@@ -69,18 +71,19 @@ async function getIdsLength(provider, deployedContractAbi, deployedContractAddre
   return res
 }
 
-
-// send_to_proxy checks for 3 votes when is called! 
+// Sends vote data to "Proxy" (child process)
 async function registerVoteAtAddress(child, data){
   child.send({vote: data});
 }
 
+// Adds ID to SC Ids List (transaction is registered on blockchain)
 async function registerIdAtAddress(contractWithSigner, id){
   const tx2 = await contractWithSigner.addId(id);
   await tx2.wait();
   return tx2;
 }
 
+// Read and Parse text from a .txt file
 function readAndParseTxtFile(filename) {
   const names = [];
   const numbers = [];
@@ -102,49 +105,54 @@ function readAndParseTxtFile(filename) {
   return [names, numbers];
 }
 
+// Main Function
 async function main(){
 
-    var loop = true;
+  var loop = true;
 
-    //Find SmartContract Address
-    const sc_address = await find_SC_Adress();
-    console.log("Found SC Address:" + sc_address);
+  // Find SmartContract Address
+  const sc_address = await find_SC_Adress();
+  console.log("Found SC Address:" + sc_address);
 
-    //Read from test votes file logic
-    const readFile = readAndParseTxtFile("VotesTest.txt");
-    const ids = readFile[0];
-    const votes = readFile[1];
+  // Read from test votes file logic
+  const readFile = readAndParseTxtFile("VotesTest.txt");
+  const ids = readFile[0];
+  const votes = readFile[1];
 
-    //Smart Contrac with Signer
-    const contract = new ethers.Contract(sc_address, contractAbi, provider);
-    const contractWithSigner = contract.connect(wallet);
+  // Smart Contrac with Signer
+  const contract = new ethers.Contract(sc_address, contractAbi, provider);
+  const contractWithSigner = contract.connect(wallet);
 
-    // "Turn ON" Proxy asynchronously ####################################################################################
-    //Child Process Logic
-    const child = fork("./Proxy.js"); // Fork the worker process 
+  // "Turn ON" Proxy asynchronously
+  // Child Process Logic
+  const child = fork("./Proxy.js"); // Fork the worker process 
 
-    child.on("message", (msg) => {
-      console.log("Message from child:", msg);
-    });
-    child.on("error", (err) => {
-      console.error("Child process error:", err);
-    });
+  child.on("message", (msg) => {
+    console.log("Message from child:", msg);
+  });
+  child.on("error", (err) => {
+    console.error("Child process error:", err);
+  });
 
 
-    //Change Contract Status to Voting
-    const tx_status = await others.statusToVoting(contractWithSigner);
-    await tx_status.wait();
-    console.log("Status: " + tx_status.toString());
+  // Change Contract Status to Voting
+  const tx_status = await others.statusToVoting(contractWithSigner);
+  await tx_status.wait();
+  console.log("Status: " + tx_status.toString());
 
-    // Loop to receive votes from FastAPI
+  // Loop to receive votes from FastAPI
   var sent_stop_to_child = false;
   child.on("close", (code) => {
     console.log("Child process exited with code:", code);
     loop = false;
   });
+
+  // Loop forVoting Process
   while (loop) {
+
+    // Get request for status of STOP signal
     const stop_state = await axios.get('http://localhost:8000/api/stop');
-    //console.log(stop_state.data);
+    
     if(stop_state.data && !sent_stop_to_child){
       child.send("stop");
       console.log("STOP: Proxy will shutdown after processing votes...");

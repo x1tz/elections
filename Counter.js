@@ -66,7 +66,6 @@ function readNamesFromFile(filename) {
   return names;
 }
 
-
 function findResults(votes, candidates) {
     // Create a dictionary to store the vote counts
     const voteCounts = { "Blank Vote": 0 };
@@ -106,10 +105,12 @@ async function main(){
   const contract = new ethers.Contract(sc_address, contractAbi, provider);
   const contractWithSigner = contract.connect(wallet);
 
+  // Change SC Status to Counting
   const tx_status = await others.statusToCounting(contractWithSigner);
   await tx_status.wait();
   console.log("Status -> " + tx_status.toString());
 
+  // Count Votes & Print Results
   countVotes();
 }
 
