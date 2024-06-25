@@ -1,13 +1,20 @@
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Body, Query
+from fastapi.responses import StreamingResponse
+import time
+import json
+from typing import Dict, List
+import asyncio
 
 
 class Vote(BaseModel):
   id: str
   choice: int
 
-votes = []
+class StopState(BaseModel):
+   is_stopped: bool
+
 stop_state = False
 
 
@@ -29,33 +36,10 @@ async def cast_vote(vote: Vote):
   """
   Casts a vote.
   """
-  # Add vote to the list (if using in-memory storage)
-  global votes
-  votes.clear()
-  votes.append(vote)
-
+  # Notify all SSE clients
+  await notify_clients("vote", vote)
   # Return the received vote (for confirmation or processing)
-  return vote
-
-@app.get("/api/votes")
-async def get_all_votes():
-  """
-  Retrieves all recorded votes.
-  """
-  global votes
-  #v = votes
-  # votes.clear()
-  return votes
-
-@app.put("/api/votes")
-async def remove_votes():
-  """
-  Removes vote from the list.
-  """
-  global votes
-  votes.clear()
-  return 'votes cleared'
-
+  return "OK"
   
 @app.get("/api/stop")
 async def get_stop():
@@ -68,8 +52,40 @@ async def get_stop():
 async def set_stop(is_stopped: bool = Query(default=False)):
   global stop_state
   stop_state = is_stopped
+  # Notify all SSE clients about stop state change
+  await notify_clients("stop", StopState(is_stopped=is_stopped))
   return {"message": f"Stop state set to: {is_stopped}"}
 
+clients = []
+
+@app.get("/events")
+async def sse_endpoint():
+    """
+    Endpoint for Server-Sent Events.
+    """
+    print("Sending message")
+    async def event_generator():
+        global clients
+        queue = asyncio.Queue()
+        clients.append(queue)
+        try:
+            while True:
+                data = await queue.get()
+                yield f"data: {data}\n\n"
+        except asyncio.CancelledError:
+            clients.remove(queue)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+async def notify_clients(event_type: str, data):
+
+    message = {
+        "type": event_type,
+        "data": data.dict()
+    }
+    message_str = json.dumps(message)
+    for queue in clients:
+        await queue.put(message_str)
 
 if __name__ == "__main__":
   import uvicorn

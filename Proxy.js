@@ -71,8 +71,9 @@ async function Stop(){
 
 async function send_to_network(contractWithSigner, vote){
     console.log("Entered send_to_network");
-
-    const tx = await contractWithSigner.addVote(vote);
+    console.log("Proxy: ", vote);
+    const tx = await contractWithSigner.addVote("0x" + vote.iv, "0x" + vote.encryptedData);
+    
     // verify the updated value
     await tx.wait();
     return tx;

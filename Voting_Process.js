@@ -105,6 +105,29 @@ function readAndParseTxtFile(filename) {
   return [names, numbers];
 }
 
+var crypto = require('crypto');
+
+var algorithm = 'aes-256-cbc'; // or any other algorithm supported by OpenSSL
+
+const keyHex = '0123456789abcdef0123456789abcdef';
+//const key = Buffer.from(keyHex); sem o buffer se a funcao ja tiver  
+
+// An encrypt function
+function encrypt(text) {
+  const iv = crypto.randomBytes(16);
+  // Creating Cipheriv with its parameter
+  let cipher = crypto.createCipheriv(algorithm, Buffer.from(keyHex), iv);
+  // Updating text
+  let encrypted = cipher.update(text);
+  // Using concatenation
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  // Returning iv and encrypted data
+  return {
+      iv: iv.toString('hex'),
+      encryptedData: encrypted.toString('hex')
+  };
+}
+
 // Main Function
 async function main(){
 
@@ -140,57 +163,59 @@ async function main(){
   await tx_status.wait();
   console.log("Status: " + tx_status.toString());
 
-  // Loop to receive votes from FastAPI
+  // Waits for exit signal from child, turns off loop (voting) after
   var sent_stop_to_child = false;
   child.on("close", (code) => {
     console.log("Child process exited with code:", code);
-    loop = false;
+    console.log("Ending voting process...");
+    process.exit()
   });
 
-  // Loop forVoting Process
-  while (loop) {
+  // Connect to EventSource on API
+  const EventSource = require('eventsource');
+  const es = new EventSource('http://localhost:8000/events');
 
-    // Get request for status of STOP signal
-    const stop_state = await axios.get('http://localhost:8000/api/stop');
-    
-    if(stop_state.data && !sent_stop_to_child){
-      child.send("stop");
-      console.log("STOP: Proxy will shutdown after processing votes...");
-      sent_stop_to_child = true;
-    }
+  
+
+  // Recieves msg from API events (vote & stop)
+  es.onmessage = async function(event) {
     try {
-      // Replace with your actual FastAPI endpoint URL and path
-      const response = await axios.get('http://localhost:8000/api/votes');
-      const votes = response.data; // Access vote data from response
-      if(votes.length > 0 ){
-          const vote = votes[0];
-          await axios.put('http://localhost:8000/api/votes'); //remove vote from fastapi 
-          var id = vote.id; // Assuming vote object has an "id" property
-          var canVote = false;
-          try {
-            canVote = await registerIdAtAddress(contractWithSigner, id);
-          } catch(error){
-            console.error("ERROR: Voter ID is not eligible to vote...");
-          }
-          if(canVote){
-            await registerVoteAtAddress(child, vote.choice); // Assuming vote object has a "choice" property
-          }
-          //await axios.put('http://localhost:8000/api/votes'); //remove vote from list
+      const message = JSON.parse(event.data); // Parse the JSON string into an object
+      console.log('Received Event:', message);
+      if (message.type === "vote") {
+        const vote = message.data;
+        var id = vote.id;
+        var canVote = false;
+        try {
+          canVote = await registerIdAtAddress(contractWithSigner, id);
+          
+        } catch(error){
+          console.error("ERROR: Voter ", id," is not eligible to vote...");
+        }
+        if(canVote){
+          // Encrypt vote
+          v = vote.choice;
+          const voteencrypt = encrypt(v.toString());
+          console.log("Vote Encrypted: ", voteencrypt);
+          await registerVoteAtAddress(child, voteencrypt); // Assuming vote object has a "choice" property
+        }
+
+      } else if (message.type === "stop") {
+
+        if(message.data.is_stopped && !sent_stop_to_child){
+          child.send("stop");
+          console.log("STOP: Proxy will shutdown after processing votes...");
+          sent_stop_to_child = true;
+        }
       }
-      //console.log("Stop State: ", stop_state.data);
+      
     } catch (error) {
-      console.error("Error fetching votes from FastAPI:", error);
+      console.error('Failed to parse event data:', error);
     }
-
-    // Adjust sleep time based on your requirements (e.g., milliseconds)
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
-
-  // ... (code to execute on shutdown - optional)
-
-  //Send STOP message to child
-  //child.kill("SIGTERM");
-  //console.log("Proxy stopped..."); 
+  };
+  es.onerror = function(err) {
+      console.error('EventSource failed:', err);
+  };
 }
 
 if (require.main === module) {

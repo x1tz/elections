@@ -92,15 +92,14 @@ Criar file para mudar status em vez de no codigo
 # DOING:
 - proxy checkar 1 em 1seg setInterval a list e assim consegue receber msg do parent?
 
+# ------------------- 25/06 -----------
+
 # Current State: 
-- Vai buscar votos e manda para proxy (enquanto valida um voto)
-- Apos 3 votos ou 60sec timeout, proxy regista votos na network
-- Se receber sinal STOP, proxy espera acabar processo de registro dos votos que faltam e termina
+    - Funciona como esperado (events, encrypt, decrypt, count)
+# fastAPI:
+- Emite evento para voto e stop 1x
 
-fastAPI:
-- Ao guardar voto, limpa primeiro a lista
-- quando VotinProcess termina de enviar voto para proxy, limpa lista. (se voto for enviado enquanto VotingProcess
-processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
+TODO: Profiling
 
 
 
@@ -112,7 +111,10 @@ processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
 
 
 
+# Encrypt
+- Cypheriv
 
+https://www.geeksforgeeks.org/node-js-crypto-createcipheriv-method/
 
 
 
@@ -165,3 +167,4 @@ processa um outro voto, esse voto vai ser apagado pelo "put" linha 169)
 - npm ethereum-input-data-decoder
 - npm install express
 - brew install ...
+- npm install eventsource

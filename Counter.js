@@ -83,6 +83,24 @@ function findResults(votes, candidates) {
     }
     return voteCounts;
 }
+
+
+// Decrypt function
+function decrypt(ivHex, encryptedDataHex) {
+
+  var crypto = require('crypto');
+  var algorithm = 'aes-256-cbc'; // or any other algorithm supported by OpenSSL
+  const keyHex = '0123456789abcdef0123456789abcdef';
+
+  // Remove '0x' prefix and convert hexadecimal strings to Buffer
+  const iv = Buffer.from(ivHex.slice(2), 'hex');  // Remove '0x' and convert to Buffer
+  const encryptedData = Buffer.from(encryptedDataHex.slice(2), 'hex');  // Remove '0x' and convert to Buffer
+
+  let decipher = crypto.createDecipheriv(algorithm, Buffer.from(keyHex), iv);
+  let decrypted = decipher.update(encryptedData);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString();
+}
   
 async function countVotes(){
     txList = await fetchTxs.getAllTransactions();
@@ -90,7 +108,8 @@ async function countVotes(){
     for(let i=0; i<txList.length;i++){
         const decoded = decoder.decodeData(txList[i].input);
         if(decoded.method == "addVote"){
-            votes.push(decoded.inputs[0].toNumber());
+            decryptedVote = decrypt(decoded.inputs[0], decoded.inputs[1]);
+            votes.push(decryptedVote);
         }
     }
     const candidates = readNamesFromFile("Candidates.txt");
