@@ -8,7 +8,12 @@ contract electionsSC{
   // An array to store strings items
   string[] private ids;
 
-  uint[] private votes; //Candidate A -> 1, Candidate B -> 2, Candidate C ->3
+  struct EncryptedVote {
+        bytes iv;
+        bytes encryptedData;
+  }
+
+  EncryptedVote[] private votes; //Candidate A -> 1, Candidate B -> 2, Candidate C ->3
 
   // Mapping to store candidate names and their vote counts
   mapping(string => uint) private eligibleVoters; //0 -> nao eligivel, 1-> eligivel, 2-> added to blockchain
@@ -77,8 +82,9 @@ contract electionsSC{
   }
 
   // Function to add a vote the list
-  function addVote(uint vote) public onlyVoting {
-    votes.push(vote);
+  function addVote(bytes memory iv, bytes memory encryptedData) public onlyVoting {
+    EncryptedVote memory newVote = EncryptedVote(iv, encryptedData);
+    votes.push(newVote);
   }
 
   function getCurrentStatus() public view returns (Status) {
@@ -100,7 +106,7 @@ contract electionsSC{
   }
 
   // Function to get List of Votes
-  function getVotesList() public view onlyCounting returns (uint[] memory) {
+  function getVotesList() public view onlyCounting returns (EncryptedVote[] memory) {
     return votes;
   }
 }
