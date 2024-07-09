@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 var ethers = require('ethers');
+const performance = require('perf_hooks').performance;
 
 // RPCNODE details
 const { tessera, besu } = require("../keys.js");
@@ -24,20 +25,40 @@ async function createContract(provider, wallet, contractAbi, contractByteCode) {
   return contract
 };
 
+function writeTimeToFile(functionName, executionTime, filename) {
+  const data = `${functionName}, ${executionTime}\n`;
+  fs.appendFileSync(filename, data);
+}
 
 async function main(){
   const provider = new ethers.JsonRpcProvider(host);
   const wallet = new ethers.Wallet(accountPrivateKey, provider);
 
-  createContract(provider, wallet, contractAbi, contractBytecode)
-  .then(async function(contract){
-    contractAddress = await contract.getAddress();
+  // LOOP FOR PROFILING
+  //for (let i = 0; i < 250; i++) {
+  try {
+
+    // TIMESTAMP - TODO 1
+    const startTime = performance.now();
+
+    const contract = await createContract(provider, wallet, contractAbi, contractBytecode);
+    await contract.waitForDeployment();
+    const contractAddress = await contract.getAddress();
+
     console.log("Contract deployed at address: " + contractAddress);
-  })
-  .catch(console.error);
 
+    // TIMESTAMP - TODO 2
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log(executionTime);
+    //writeTimeToFile('SC_deploy.js', executionTime, "sc_deploy.csv");
 
+  } catch (error) {
+    console.error('Error deploying contract:', error);
+  }
+//}
 }
+  
 
 if (require.main === module) {
   main();

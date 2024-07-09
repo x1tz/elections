@@ -24,8 +24,6 @@ const web3 = new Web3(new Web3.providers.HttpProvider(host));
 const InputDataDecoder = require('ethereum-input-data-decoder');
 const decoder = new InputDataDecoder(contractAbi);
 
-var votes =[];
-
 async function find_SC_Adress(){
   const blockNumber = await web3.eth.getBlockNumber(); //Get most recent block number
   var foundSC = false;
@@ -67,21 +65,21 @@ function readNamesFromFile(filename) {
 }
 
 function findResults(votes, candidates) {
-    // Create a dictionary to store the vote counts
-    const voteCounts = { "Blank Vote": 0 };
-    for (const candidate of candidates) {
-      voteCounts[candidate] = 0;
+
+  // Create a dictionary to store the vote counts
+  const voteCounts = { "Blank Vote": 0 };
+  for (const candidate of candidates) {
+    voteCounts[candidate] = 0;
+  }
+  // Count the votes for each valid candidate
+  for (const vote of votes) {
+    if (vote >= 1 && vote <= candidates.length) {
+      voteCounts[candidates[vote - 1]] += 1;
+    } else {
+      voteCounts["Blank Vote"] += 1;
     }
-  
-    // Count the votes for each valid candidate
-    for (const vote of votes) {
-      if (vote >= 1 && vote <= candidates.length) {
-        voteCounts[candidates[vote - 1]] += 1;
-      } else {
-        voteCounts["Blank Vote"] += 1;
-      }
-    }
-    return voteCounts;
+  }
+  return voteCounts;
 }
 
 
@@ -103,6 +101,8 @@ function decrypt(ivHex, encryptedDataHex) {
 }
   
 async function countVotes(){
+    const votes =[];
+    var txList = [];
     txList = await fetchTxs.getAllTransactions();
     
     for(let i=0; i<txList.length;i++){
@@ -113,10 +113,15 @@ async function countVotes(){
         }
     }
     const candidates = readNamesFromFile("Candidates.txt");
+
     const results = findResults(votes, candidates);
-    console.log(results);
 
     return results; //format [{candidate: 1, count: 3}, {candidate: 2, count: 2}, etc...]
+}
+
+function writeTimeToFile(functionName, executionTime, filename) {
+  const data = `${functionName}, ${executionTime}\n`;
+  fs.appendFileSync(filename, data);
 }
 
 async function main(){
@@ -124,13 +129,28 @@ async function main(){
   const contract = new ethers.Contract(sc_address, contractAbi, provider);
   const contractWithSigner = contract.connect(wallet);
 
-  // Change SC Status to Counting
-  const tx_status = await others.statusToCounting(contractWithSigner);
-  await tx_status.wait();
-  console.log("Status -> " + tx_status.toString());
+  //LOOP
+  for(i=0;i<500;i++){
 
-  // Count Votes & Print Results
-  countVotes();
+    // TIMESTAMP - 1
+    const startTime = performance.now();
+    // Change SC Status to Counting
+    const tx_status = await others.statusToCounting(contractWithSigner);
+    await tx_status.wait();
+    //const tx_status = await others.getCurrentStatus(contractWithSigner);
+    console.log("Status -> " + tx_status.toString());
+  
+    const results = await countVotes();
+    console.log(results);
+
+    // TIMESTAMP - 2
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    console.log("Decrypt & Count: ", executionTime);
+    writeTimeToFile('sc_votes_decrypt_count', executionTime, "Counter.csv");
+  }
+
+  
 }
 
 if (require.main === module) {

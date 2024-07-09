@@ -1,0 +1,1030 @@
+REPLACEMENT_UNDERPRICED no Proxy e Voting Process resolveu problema
+todos os ids e votos sao registados, fastAPI com 7s
+
+5s e 250 ids / votos: nao deu 246/246 nao tinha funcao sleep definida devia abortar quando dava erro
+5s 250x : 250 /250 
+
+counter agora adiciona votos a ultima contagem, talvez dictionario do findResults nao da reset?
+network pausada para amanha contar e fazer com 500 votos dps tbm
+
+
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6288.484749999829
+Encrypt & Register Vote:  0.3896249998360872
+All Vote:  6290.793874999974
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  434
+855
+TX sent successfully!
+Sent to Network DEBUG:  419
+Proxy: Registered vote
+Proxy Process Vote:  4219.684375000186
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '437', choice: 1 } }
+DEBUG:  437
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5287.93383300025
+Encrypt & Register Vote:  0.509707999881357
+All Vote:  5291.573708999902
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  435
+857
+TX sent successfully!
+Sent to Network DEBUG:  420
+Proxy: Registered vote
+Proxy Process Vote:  4178.607083000243
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '438', choice: 1 } }
+DEBUG:  438
+859
+TX sent successfully!
+Sent to Network DEBUG:  421
+Proxy: Registered vote
+Proxy Process Vote:  4188.06004099967
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8341.67645899998
+Encrypt & Register Vote:  0.8118749996647239
+All Vote:  8345.859666999895
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  436
+Received Event: { type: 'vote', data: { id: '439', choice: 3 } }
+DEBUG:  439
+861
+TX sent successfully!
+Sent to Network DEBUG:  422
+Proxy: Registered vote
+Proxy Process Vote:  4195.298041000031
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7374.248875000048
+Encrypt & Register Vote:  1.4758339999243617
+All Vote:  7379.898541000206
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  437
+Received Event: { type: 'vote', data: { id: '440', choice: 2 } }
+DEBUG:  440
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6376.035707999952
+Encrypt & Register Vote:  0.3093330003321171
+All Vote:  6377.752249999903
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  438
+863
+TX sent successfully!
+Sent to Network DEBUG:  423
+Proxy: Registered vote
+Proxy Process Vote:  8213.379249999765
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '441', choice: 1 } }
+DEBUG:  441
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5378.184291999787
+Encrypt & Register Vote:  0.19891700008884072
+All Vote:  5379.823874999769
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  439
+865
+TX sent successfully!
+Sent to Network DEBUG:  424
+Proxy: Registered vote
+Proxy Process Vote:  4248.300375000108
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '442', choice: 3 } }
+DEBUG:  442
+867
+TX sent successfully!
+Sent to Network DEBUG:  425
+Proxy: Registered vote
+Proxy Process Vote:  4177.848832999822
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8429.559792000335
+Encrypt & Register Vote:  0.5671250000596046
+All Vote:  8432.412332999986
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  440
+Received Event: { type: 'vote', data: { id: '443', choice: 1 } }
+DEBUG:  443
+869
+TX sent successfully!
+Sent to Network DEBUG:  426
+Proxy: Registered vote
+Proxy Process Vote:  4206.717542000115
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7441.6817089999095
+Encrypt & Register Vote:  0.17995900008827448
+All Vote:  7443.898333000019
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  441
+Received Event: { type: 'vote', data: { id: '444', choice: 2 } }
+DEBUG:  444
+871
+TX sent successfully!
+Sent to Network DEBUG:  427
+Proxy: Registered vote
+Proxy Process Vote:  4175.220708000008
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Process Vote: > 10 Votes
+Register ID:  6462.435457999818
+Proxy: sending vote to blockchain!
+Encrypt & Register Vote:  0.46591699961572886
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  442
+All Vote:  6465.878707999829
+Received Event: { type: 'vote', data: { id: '445', choice: 1 } }
+DEBUG:  445
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5466.269290999975
+Encrypt & Register Vote:  0.8171249995939434
+All Vote:  5469.784165999852
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  443
+873
+TX sent successfully!
+Sent to Network DEBUG:  428
+Proxy: Registered vote
+Proxy Process Vote:  4200.309833999723
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4488.086624999996
+Encrypt & Register Vote:  0.5634590000845492
+All Vote:  4491.182583000045
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  444
+875
+TX sent successfully!
+Sent to Network DEBUG:  429
+Proxy: Registered vote
+Proxy Process Vote:  4185.395959000103
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '446', choice: 3 } }
+DEBUG:  446
+Received Event: { type: 'vote', data: { id: '447', choice: 2 } }
+DEBUG:  447
+876
+TX sent successfully!
+Sent to Network DEBUG:  430
+Proxy: Registered vote
+Proxy Process Vote:  8240.297332999762
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8196.93662500009
+Encrypt & Register Vote:  0.36841699993237853
+All Vote:  8199.658875000197
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  445
+Received Event: { type: 'vote', data: { id: '448', choice: 1 } }
+DEBUG:  448
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7212.105582999997
+Encrypt & Register Vote:  0.488708000164479
+All Vote:  7215.167165999766
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  446
+879
+TX sent successfully!
+Sent to Network DEBUG:  431
+Proxy: Registered vote
+Proxy Process Vote:  4189.340917000081
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '449', choice: 1 } }
+DEBUG:  449
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6218.0739579997025
+Encrypt & Register Vote:  0.29091700026765466
+All Vote:  6220.2387080001645
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  447
+881
+TX sent successfully!
+Sent to Network DEBUG:  432
+Proxy: Registered vote
+Proxy Process Vote:  4206.813708000351
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '450', choice: 3 } }
+DEBUG:  450
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5209.15320800012
+Encrypt & Register Vote:  0.3188330000266433
+All Vote:  5212.502834000159
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  448
+883
+TX sent successfully!
+Sent to Network DEBUG:  433
+Proxy: Registered vote
+Proxy Process Vote:  4185.69604199985
+Proxy: sending vote to blockchain!
+885
+TX sent successfully!
+Sent to Network DEBUG:  434
+Proxy: Registered vote
+Proxy Process Vote:  4170.273041999899
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '451', choice: 2 } }
+DEBUG:  451
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8280.690124999732
+Encrypt & Register Vote:  0.4690000000409782
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  449
+All Vote:  8283.968625000212
+Received Event: { type: 'vote', data: { id: '452', choice: 8 } }
+DEBUG:  452
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7300.772250000387
+Encrypt & Register Vote:  0.29429200012236834
+All Vote:  7302.578542000148
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  450
+886
+TX sent successfully!
+Sent to Network DEBUG:  435
+Proxy: Registered vote
+Proxy Process Vote:  8192.517667000182
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '453', choice: 8 } }
+DEBUG:  453
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6314.696250000037
+Encrypt & Register Vote:  0.32529200008139014
+All Vote:  6317.000041999854
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  451
+889
+TX sent successfully!
+Sent to Network DEBUG:  436
+Proxy: Registered vote
+Proxy Process Vote:  4183.725875000004
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '454', choice: 2 } }
+DEBUG:  454
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5305.6679579997435
+Encrypt & Register Vote:  0.5268330001272261
+All Vote:  5309.39183399966
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  452
+891
+TX sent successfully!
+Sent to Network DEBUG:  437
+Proxy: Registered vote
+Proxy Process Vote:  4211.551791999955
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '455', choice: 1 } }
+DEBUG:  455
+893
+TX sent successfully!
+Sent to Network DEBUG:  438
+Proxy: Registered vote
+Proxy Process Vote:  4207.619999999646
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8361.184499999974
+Encrypt & Register Vote:  0.52508300030604
+All Vote:  8364.8076249999
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  453
+895
+TX sent successfully!
+Sent to Network DEBUG:  439
+Proxy: Registered vote
+Proxy Process Vote:  4190.34833299974
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '456', choice: 3 } }
+DEBUG:  456
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7379.811416000128
+Encrypt & Register Vote:  0.3106249999254942
+All Vote:  7383.803084000014
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  454
+Received Event: { type: 'vote', data: { id: '457', choice: 1 } }
+DEBUG:  457
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6397.047582999803
+Encrypt & Register Vote:  0.5885830000042915
+All Vote:  6400.370457999874
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  455
+896
+TX sent successfully!
+Sent to Network DEBUG:  440
+Proxy: Registered vote
+Proxy Process Vote:  8245.450834000017
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '458', choice: 2 } }
+DEBUG:  458
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5405.513958000112
+Encrypt & Register Vote:  0.263582999818027
+All Vote:  5408.049209000077
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  456
+899
+TX sent successfully!
+Sent to Network DEBUG:  441
+Proxy: Registered vote
+Proxy Process Vote:  4225.596083000302
+Process Vote: > 10 Votes
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '459', choice: 2 } }
+DEBUG:  459
+901
+TX sent successfully!
+Sent to Network DEBUG:  442
+Proxy: Registered vote
+Proxy Process Vote:  4231.990791999735
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8433.94387499988
+Encrypt & Register Vote:  0.5455829999409616
+All Vote:  8438.202458000276
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  457
+Received Event: { type: 'vote', data: { id: '460', choice: 1 } }
+DEBUG:  460
+903
+TX sent successfully!
+Sent to Network DEBUG:  443
+Proxy: Registered vote
+Proxy Process Vote:  4200.631208000239
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7474.389875000343
+Encrypt & Register Vote:  0.3965409998781979
+All Vote:  7477.277916999999
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  458
+Received Event: { type: 'vote', data: { id: '461', choice: 8 } }
+DEBUG:  461
+905
+TX sent successfully!
+Sent to Network DEBUG:  444
+Proxy: Registered vote
+Proxy Process Vote:  4183.278500000015
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6491.060999999754
+Encrypt & Register Vote:  0.4562499998137355
+All Vote:  6494.1290830001235
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  459
+Received Event: { type: 'vote', data: { id: '462', choice: 1 } }
+DEBUG:  462
+907
+TX sent successfully!
+Sent to Network DEBUG:  445
+Proxy: Registered vote
+Proxy Process Vote:  4171.764042000286
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5503.996249999851
+Encrypt & Register Vote:  0.258457999676466
+All Vote:  5505.817874999717
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  460
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4521.374458999839
+Encrypt & Register Vote:  0.41933299973607063
+All Vote:  4525.239666000009
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  461
+Received Event: { type: 'vote', data: { id: '463', choice: 8 } }
+DEBUG:  463
+909
+TX sent successfully!
+Sent to Network DEBUG:  446
+Proxy: Registered vote
+Proxy Process Vote:  8208.548041999806
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '464', choice: 2 } }
+DEBUG:  464
+911
+TX sent successfully!
+Sent to Network DEBUG:  447
+Proxy: Registered vote
+Proxy Process Vote:  4244.932082999963
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8221.067625000142
+Encrypt & Register Vote:  1.214250000193715
+All Vote:  8225.073208000045
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  462
+Received Event: { type: 'vote', data: { id: '465', choice: 3 } }
+DEBUG:  465
+913
+TX sent successfully!
+Sent to Network DEBUG:  448
+Proxy: Registered vote
+Proxy Process Vote:  4187.3103749998845
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7238.623708999716
+Encrypt & Register Vote:  0.7637499999254942
+All Vote:  7241.8416249998845
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  463
+Received Event: { type: 'vote', data: { id: '466', choice: 3 } }
+DEBUG:  466
+915
+TX sent successfully!
+Sent to Network DEBUG:  449
+Proxy: Registered vote
+Proxy Process Vote:  4177.716541999951
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6298.416916999966
+Encrypt & Register Vote:  1.5020419997163117
+All Vote:  6306.872417000122
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  464
+Received Event: { type: 'vote', data: { id: '467', choice: 8 } }
+DEBUG:  467
+917
+TX sent successfully!
+Sent to Network DEBUG:  450
+Proxy: Registered vote
+Proxy Process Vote:  4174.580416999757
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5255.850417000242
+Encrypt & Register Vote:  0.22312500001862645
+All Vote:  5257.389874999877
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  465
+919
+TX sent successfully!
+Sent to Network DEBUG:  451
+Proxy: Registered vote
+Proxy Process Vote:  4174.635375000071
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '468', choice: 2 } }
+DEBUG:  468
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8327.722666000016
+Encrypt & Register Vote:  0.7129999999888241
+All Vote:  8331.883208000101
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  466
+Received Event: { type: 'vote', data: { id: '469', choice: 2 } }
+DEBUG:  469
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7353.104416000191
+Encrypt & Register Vote:  0.6698330002836883
+All Vote:  7356.459792000242
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  467
+920
+TX sent successfully!
+Sent to Network DEBUG:  452
+Proxy: Registered vote
+Proxy Process Vote:  8198.40383299999
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '470', choice: 1 } }
+DEBUG:  470
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6361.702833000105
+Encrypt & Register Vote:  0.3453330001793802
+All Vote:  6364.490457999986
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  468
+923
+TX sent successfully!
+Sent to Network DEBUG:  453
+Proxy: Registered vote
+Proxy Process Vote:  4200.255042000208
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '471', choice: 1 } }
+DEBUG:  471
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5360.623417000286
+Encrypt & Register Vote:  0.3805829999037087
+All Vote:  5362.876999999862
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  469
+925
+TX sent successfully!
+Sent to Network DEBUG:  454
+Proxy: Registered vote
+Proxy Process Vote:  4208.604125000071
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '472', choice: 3 } }
+DEBUG:  472
+927
+TX sent successfully!
+Sent to Network DEBUG:  455
+Proxy: Registered vote
+Proxy Process Vote:  4173.448792000301
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8433.511208000127
+Encrypt & Register Vote:  0.5703750001266599
+All Vote:  8436.591167000122
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  470
+Received Event: { type: 'vote', data: { id: '473', choice: 1 } }
+DEBUG:  473
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7458.247957999818
+Encrypt & Register Vote:  0.6282919999212027
+All Vote:  7461.003124999814
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  471
+929
+TX sent successfully!
+Sent to Network DEBUG:  456
+Proxy: Registered vote
+Proxy Process Vote:  8188.939166999888
+Process Vote: > 10 Votes
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '474', choice: 1 } }
+DEBUG:  474
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6467.698082999792
+Encrypt & Register Vote:  0.503292000386864
+All Vote:  6470.652083000168
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  472
+931
+TX sent successfully!
+Sent to Network DEBUG:  457
+Proxy: Registered vote
+Proxy Process Vote:  4201.131959000137
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '475', choice: 2 } }
+DEBUG:  475
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5473.144083000254
+Encrypt & Register Vote:  0.4794160001911223
+All Vote:  5475.7122089997865
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  473
+933
+TX sent successfully!
+Sent to Network DEBUG:  458
+Proxy: Registered vote
+Proxy Process Vote:  4234.297583000269
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4487.143541000318
+Encrypt & Register Vote:  0.42445800034329295
+All Vote:  4491.150084000081
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  474
+Received Event: { type: 'vote', data: { id: '476', choice: 8 } }
+DEBUG:  476
+935
+TX sent successfully!
+Sent to Network DEBUG:  459
+Proxy: Registered vote
+Proxy Process Vote:  4171.399875000119
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '477', choice: 8 } }
+DEBUG:  477
+937
+TX sent successfully!
+Sent to Network DEBUG:  460
+Proxy: Registered vote
+Proxy Process Vote:  4149.113791999873
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8254.157833999954
+Encrypt & Register Vote:  0.5793330003507435
+All Vote:  8257.893792000134
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  475
+939
+TX sent successfully!
+Sent to Network DEBUG:  461
+Proxy: Registered vote
+Proxy Process Vote:  4168.651000000071
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '478', choice: 3 } }
+DEBUG:  478
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7302.054207999725
+Encrypt & Register Vote:  0.9417089996859431
+All Vote:  7307.341332999989
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  476
+Received Event: { type: 'vote', data: { id: '479', choice: 8 } }
+DEBUG:  479
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6290.325792000163
+Encrypt & Register Vote:  0.45645800000056624
+All Vote:  6293.515584000386
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  477
+940
+TX sent successfully!
+Sent to Network DEBUG:  462
+Proxy: Registered vote
+Proxy Process Vote:  8226.48404100025
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '480', choice: 3 } }
+DEBUG:  480
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5285.965749999974
+Encrypt & Register Vote:  0.31262500025331974
+All Vote:  5288.248666999862
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  478
+943
+TX sent successfully!
+Sent to Network DEBUG:  463
+Proxy: Registered vote
+Proxy Process Vote:  4226.454499999993
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '481', choice: 8 } }
+DEBUG:  481
+945
+TX sent successfully!
+Sent to Network DEBUG:  464
+Proxy: Registered vote
+Proxy Process Vote:  4186.201292000245
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8377.01249999972
+Encrypt & Register Vote:  0.5969579997472465
+All Vote:  8381.225583000109
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  479
+Received Event: { type: 'vote', data: { id: '482', choice: 2 } }
+DEBUG:  482
+947
+TX sent successfully!
+Sent to Network DEBUG:  465
+Proxy: Registered vote
+Proxy Process Vote:  4182.131166999694
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7386.573084000032
+Encrypt & Register Vote:  0.4070000001229346
+All Vote:  7389.011500000022
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  480
+949
+TX sent successfully!
+Sent to Network DEBUG:  466
+Proxy: Registered vote
+Proxy Process Vote:  4202.224500000011
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '483', choice: 3 } }
+DEBUG:  483
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6424.475666000042
+Encrypt & Register Vote:  0.2573750000447035
+All Vote:  6426.135540999938
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  481
+Received Event: { type: 'vote', data: { id: '484', choice: 8 } }
+DEBUG:  484
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5427.653665999882
+Encrypt & Register Vote:  0.5067909997887909
+All Vote:  5430.791749999858
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  482
+950
+TX sent successfully!
+Sent to Network DEBUG:  467
+Proxy: Registered vote
+Proxy Process Vote:  8187.354915999807
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4425.364291999955
+Encrypt & Register Vote:  0.4833749998360872
+All Vote:  4430.04224999994
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  483
+Received Event: { type: 'vote', data: { id: '485', choice: 3 } }
+DEBUG:  485
+953
+TX sent successfully!
+Sent to Network DEBUG:  468
+Proxy: Registered vote
+Proxy Process Vote:  4181.878999999724
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '486', choice: 8 } }
+DEBUG:  486
+955
+TX sent successfully!
+Sent to Network DEBUG:  469
+Proxy: Registered vote
+Proxy Process Vote:  4193.26012500003
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8226.365125000011
+Encrypt & Register Vote:  0.3124590003862977
+All Vote:  8230.488374999724
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  484
+Received Event: { type: 'vote', data: { id: '487', choice: 1 } }
+DEBUG:  487
+957
+TX sent successfully!
+Sent to Network DEBUG:  470
+Proxy: Registered vote
+Proxy Process Vote:  4209.477583999746
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7249.835291000083
+Encrypt & Register Vote:  0.3773749996908009
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  485
+All Vote:  7252.20341600012
+Received Event: { type: 'vote', data: { id: '488', choice: 3 } }
+DEBUG:  488
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6264.325832999777
+Encrypt & Register Vote:  0.3427500003017485
+All Vote:  6268.324791999999
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  486
+959
+TX sent successfully!
+Sent to Network DEBUG:  471
+Proxy: Registered vote
+Proxy Process Vote:  8216.858916999772
+Process Vote: > 10 Votes
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '489', choice: 3 } }
+DEBUG:  489
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5264.749249999877
+Encrypt & Register Vote:  0.23399999970570207
+All Vote:  5267.596249999944
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  487
+961
+TX sent successfully!
+Sent to Network DEBUG:  472
+Proxy: Registered vote
+Proxy Process Vote:  4220.9589160000905
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4298.012875000015
+Encrypt & Register Vote:  0.472917000297457
+All Vote:  4300.932959000114
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  488
+Received Event: { type: 'vote', data: { id: '490', choice: 3 } }
+DEBUG:  490
+963
+TX sent successfully!
+Sent to Network DEBUG:  473
+Proxy: Registered vote
+Proxy Process Vote:  4187.522540999576
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '491', choice: 3 } }
+DEBUG:  491
+965
+TX sent successfully!
+Sent to Network DEBUG:  474
+Proxy: Registered vote
+Proxy Process Vote:  4195.21325000003
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8281.705707999878
+Encrypt & Register Vote:  0.29862499982118607
+All Vote:  8283.522249999922
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  489
+Received Event: { type: 'vote', data: { id: '492', choice: 8 } }
+DEBUG:  492
+967
+TX sent successfully!
+Sent to Network DEBUG:  475
+Proxy: Registered vote
+Proxy Process Vote:  4169.7962919999845
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7303.49049999984
+Encrypt & Register Vote:  0.3816660000011325
+All Vote:  7305.532333000097
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  490
+969
+TX sent successfully!
+Sent to Network DEBUG:  476
+Proxy: Registered vote
+Proxy Process Vote:  4174.933250000235
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '493', choice: 8 } }
+DEBUG:  493
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6324.838625000324
+Encrypt & Register Vote:  0.607332999818027
+All Vote:  6329.15041699959
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  491
+Received Event: { type: 'vote', data: { id: '494', choice: 1 } }
+DEBUG:  494
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5326.256958000362
+Encrypt & Register Vote:  0.47075000032782555
+All Vote:  5329.537167000119
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  492
+970
+TX sent successfully!
+Sent to Network DEBUG:  477
+Proxy: Registered vote
+Proxy Process Vote:  8234.19520800002
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  4336.227415999863
+Encrypt & Register Vote:  0.4729999997653067
+All Vote:  4339.108166999649
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  493
+Received Event: { type: 'vote', data: { id: '495', choice: 3 } }
+DEBUG:  495
+973
+TX sent successfully!
+Sent to Network DEBUG:  478
+Proxy: Registered vote
+Proxy Process Vote:  4179.750457999762
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '496', choice: 1 } }
+DEBUG:  496
+975
+TX sent successfully!
+Sent to Network DEBUG:  479
+Proxy: Registered vote
+Proxy Process Vote:  4188.110832999926
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8238.468791999854
+Encrypt & Register Vote:  0.21774999983608723
+All Vote:  8239.994374999776
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  494
+Received Event: { type: 'vote', data: { id: '497', choice: 2 } }
+DEBUG:  497
+977
+TX sent successfully!
+Sent to Network DEBUG:  480
+Proxy: Registered vote
+Proxy Process Vote:  4178.0759999998845
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7273.097457999829
+Encrypt & Register Vote:  0.31758399959653616
+All Vote:  7275.313250000123
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  495
+979
+TX sent successfully!
+Sent to Network DEBUG:  481
+Proxy: Registered vote
+Proxy Process Vote:  4156.938792000059
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '498', choice: 1 } }
+DEBUG:  498
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  6269.1509160003625
+Proxy: Vote added to proxy.
+Encrypt & Register Vote:  0.5392909999936819
+TOTAL RECIEVED VOTES ON PROXY:  496
+All Vote:  6272.261500000022
+Received Event: { type: 'vote', data: { id: '499', choice: 1 } }
+DEBUG:  499
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  5251.149292000104
+Encrypt & Register Vote:  0.34370800014585257
+All Vote:  5253.91174999997
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  497
+980
+TX sent successfully!
+Sent to Network DEBUG:  482
+Proxy: Registered vote
+Proxy Process Vote:  8186.899583000224
+Proxy: sending vote to blockchain!
+Received Event: { type: 'vote', data: { id: '500', choice: 2 } }
+DEBUG:  500
+983
+TX sent successfully!
+Sent to Network DEBUG:  483
+Proxy: Registered vote
+Proxy Process Vote:  4203.486624999903
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  8311.363499999978
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  498
+Encrypt & Register Vote:  0.6005840003490448
+All Vote:  8314.852042000275
+985
+TX sent successfully!
+Sent to Network DEBUG:  484
+Proxy: Registered vote
+Proxy Process Vote:  4203.661667000037
+Proxy: sending vote to blockchain!
+ID teste tempo se espera a seguir canVote.wait() (RegistedIDatAddress)
+Register ID:  7341.161500000395
+Encrypt & Register Vote:  0.9290829999372363
+All Vote:  7344.542209000327
+Proxy: Vote added to proxy.
+TOTAL RECIEVED VOTES ON PROXY:  499
+986
+TX sent successfully!
+Sent to Network DEBUG:  485
+Proxy: Registered vote
+Proxy Process Vote:  4194.499166000169
+Proxy: sending vote to blockchain!
+987
+TX sent successfully!
+Sent to Network DEBUG:  486
+Proxy: Registered vote
+Proxy Process Vote:  4177.5796670001
+Process Vote: > 10 Votes
+Proxy: sending vote to blockchain!
+988
+TX sent successfully!
+Sent to Network DEBUG:  487
+Proxy: Registered vote
+Proxy Process Vote:  4164.648541999981
+Proxy: sending vote to blockchain!
+989
+TX sent successfully!
+Sent to Network DEBUG:  488
+Proxy: Registered vote
+Proxy Process Vote:  8196.923542000353
+Proxy: sending vote to blockchain!
+990
+TX sent successfully!
+Sent to Network DEBUG:  489
+Proxy: Registered vote
+Proxy Process Vote:  4230.093791000079
+Proxy: sending vote to blockchain!
+991
+TX sent successfully!
+Sent to Network DEBUG:  490
+Proxy: Registered vote
+Proxy Process Vote:  4230.231665999629
+Proxy: sending vote to blockchain!
+992
+TX sent successfully!
+Sent to Network DEBUG:  491
+Proxy: Registered vote
+Proxy Process Vote:  4154.840749999974
+Proxy: sending vote to blockchain!
+993
+TX sent successfully!
+Sent to Network DEBUG:  492
+Proxy: Registered vote
+Proxy Process Vote:  4172.4409170001745
+Proxy: sending vote to blockchain!
+994
+TX sent successfully!
+Sent to Network DEBUG:  493
+Proxy: Registered vote
+Proxy Process Vote:  8202.02545899991
+Proxy: sending vote to blockchain!
+995
+TX sent successfully!
+Sent to Network DEBUG:  494
+Proxy: Registered vote
+Proxy Process Vote:  4173.664584000129
+Proxy: sending vote to blockchain!
+996
+TX sent successfully!
+Sent to Network DEBUG:  495
+Proxy: Registered vote
+Proxy Process Vote:  4167.181749999989
+Proxy: sending vote to blockchain!
+997
+TX sent successfully!
+Sent to Network DEBUG:  496
+Proxy: Registered vote
+Proxy Process Vote:  4174.421249999665
+Proxy: sending vote to blockchain!
+998
+TX sent successfully!
+Sent to Network DEBUG:  497
+Proxy: Registered vote
+Proxy Process Vote:  4184.066750000231
+Proxy: sending vote to blockchain!
+999
+TX sent successfully!
+Sent to Network DEBUG:  498
+Proxy: Registered vote
+Proxy Process Vote:  8226.34066700004
+Proxy: sending vote to blockchain!
+1000
+TX sent successfully!
+Sent to Network DEBUG:  499
+Proxy: Registered vote
+Proxy Process Vote:  4192.175000000279
+Received Event: { type: 'stop', data: '{"is_stopped":true}' }
+STOP: Proxy will shutdown after processing votes...
+All Vote:  2.9792920001782477
+Child process exited with code: 0
+Ending voting process...
+hugoconsciencia@Air-de-Hugo elections % 

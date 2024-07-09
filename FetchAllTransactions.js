@@ -10,9 +10,8 @@ const providerUrl = 'http://localhost:8545'; //host
 // Create a Web3 instance connected to your node
 const web3 = new Web3(new Web3.providers.HttpProvider(providerUrl));
 
-let myTransactionsList = []; //Initialize an empty list
-
 async function getAllTransactions() {
+    let myTransactionsList = []; //Initialize an empty list
     const blockNumber = await web3.eth.getBlockNumber(); //Get most recent block number
     //console.log(blockNumber);
 

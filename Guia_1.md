@@ -100,8 +100,15 @@ Criar file para mudar status em vez de no codigo
 - Emite evento para voto e stop 1x
 
 TODO: Profiling
+ - Lidar com error REPLACEMENT_UNDERPRICED -32000
 
+error: { code: -32000, message: 'Replacement transaction underpriced' }
 
+pc adormecer pode causar problema de faltar votos?
+244 votos recebidos e 244 list len ids
+219 votos contados, 219 list len votes
+
+sera q se receber outro event enquanto lida com outro aborta? recomeca?
 
 
 
@@ -124,6 +131,7 @@ https://www.geeksforgeeks.org/node-js-crypto-createcipheriv-method/
 - FastAPI: fastapi dev eth_api.py
 - Quorum Blockchain: ./run.sh
 - Javascripts: node name.js (SC_deploy, SC_Init ,Voting, Counter)
+- Para alterar consensus: ficheiro .env e mudar
 
 
 # Atencao
@@ -137,27 +145,6 @@ https://www.geeksforgeeks.org/node-js-crypto-createcipheriv-method/
 - Enviar Vote Proxy
 - Proxy envia Vote para blockchain
 - Contador
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Instalacoes feitas

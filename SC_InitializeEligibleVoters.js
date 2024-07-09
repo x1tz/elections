@@ -7,6 +7,7 @@ const others = require('./Others.js');
 // RPCNODE details
 const { tessera, besu } = require("../keys.js");
 const { register } = require('module');
+const { exec } = require('child_process');
 const host = besu.rpcnode.url;
 const accountPrivateKey = besu.rpcnode.accountPrivateKey;
 
@@ -54,6 +55,7 @@ async function initializeEligibleVoters(contractWithSigner, namesList){
   await tx.wait();
   // const res = await contract.get();
   // console.log("Obtained value at deployed contract is: "+ res);
+  console.log("List of voters initialized!");
   return tx;
 }
 
@@ -76,24 +78,40 @@ function readNamesFromFile(filename) {
   }
 }
 
+function writeTimeToFile(functionName, executionTime, filename) {
+  const data = `${functionName}, ${executionTime}\n`;
+  fs.appendFileSync(filename, data);
+}
 
 async function main(){
+
   const provider = new ethers.JsonRpcProvider(host);
   const wallet = new ethers.Wallet(accountPrivateKey, provider);
-
-  const filename = 'VotersIds.txt'; 
-  const namesList = readNamesFromFile(filename);
-  console.log(namesList);
-
   const sc_address = await find_SC_Adress();
-
   const contract = new ethers.Contract(sc_address, contractAbi, provider);
-  const contractWithSigner = contract.connect(wallet);
 
-  const status = await others.getCurrentStatus(contractWithSigner);
-  console.log("Status: " + status);
+  //for (let i = 0; i < 250; i++) {
+    // TIMESTAMP - 1
+    const startTime = performance.now();
+    
+    const filename = 'VotersIds.txt'; 
+    const namesList = readNamesFromFile(filename);
+    //console.log(namesList);
 
-  initializeEligibleVoters(contractWithSigner, namesList);
+    
+    const contractWithSigner = contract.connect(wallet);
+
+    const status = await others.getCurrentStatus(contractWithSigner);
+    console.log("Status: " + status);
+
+    await initializeEligibleVoters(contractWithSigner, namesList);
+
+    // TIMESTAMP - 2
+    const endTime = performance.now();
+    const executionTime = endTime - startTime;
+    //console.log(executionTime);
+    //writeTimeToFile('SC_InitializeEligibleVoters.js', executionTime, "sc_InitializeEligibleVoters.csv");
+  //}
 }
 
 if (require.main === module) {

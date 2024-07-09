@@ -4,23 +4,30 @@ var ethers = require('ethers');
 const Web3 = require('web3');
 const axios = require('axios'); // Import axios
 
-
+var debug = 0;
 var list = []
 var clock = false;
 var timedout = false;
-
 var to_stop = false;
-
 var processOpen = true;
-
+var total_recieved = 0;
 // RPCNODE details
 const { tessera, besu } = require("../keys.js");
 const { register } = require('module');
+
+//RPCNode Host
 const host = besu.rpcnode.url;
 const accountPrivateKey = besu.rpcnode.accountPrivateKey;
-
 const provider = new ethers.JsonRpcProvider(host);
+const signer = new ethers.JsonRpcSigner(provider, besu.rpcnode.accountAddress);
 const wallet = new ethers.Wallet(accountPrivateKey, provider);
+
+//MEMBER2 Host
+//const host2 = besu.member2.url;
+//const accountPrivateKey2 = besu.member2.accountPrivateKey;
+//const provider2 = new ethers.JsonRpcProvider(host2);
+//const wallet2 = new ethers.Wallet(accountPrivateKey2, provider2);
+
 
 // abi and bytecode generated from electionsSC.sol:
 // > solcjs --bin --abi electionsSC.sol
@@ -60,8 +67,10 @@ async function find_SC_Adress(){
 }
 
 async function send_to_proxy(vote){
-    list.push(vote);
-    console.log("Proxy: Vote added to proxy.");
+  list.push(vote);
+  console.log("Proxy: Vote added to proxy.");
+  total_recieved += 1;
+  console.log("TOTAL RECIEVED VOTES ON PROXY: ", total_recieved);
 
 }
 
@@ -69,14 +78,40 @@ async function Stop(){
     stop=true;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 async function send_to_network(contractWithSigner, vote){
-    console.log("Entered send_to_network");
-    console.log("Proxy: ", vote);
-    const tx = await contractWithSigner.addVote("0x" + vote.iv, "0x" + vote.encryptedData);
-    
-    // verify the updated value
+  try{
+    console.log("Proxy: sending vote to blockchain!");
+    //console.log("Nonce: ", nonce2);
+    const tx = await contractWithSigner.addVote(
+      "0x" + vote.iv, 
+      "0x" + vote.encryptedData,
+    );
     await tx.wait();
+    console.log(tx.nonce);
+    console.log("TX sent successfully!");
+    debug += 1;
+    console.log("Sent to Network DEBUG: ", debug);
+    //await sleep(1000);
     return tx;
+  } catch(error){
+    if(error.code == 'REPLACEMENT_UNDERPRICED'){
+      console.log("Error Sending Vote: Retrying...")
+      sleep(1000);
+      const tx = await send_to_network(contractWithSigner, vote);
+      await tx.wait();
+      return tx;
+    }else {
+      console.log("ERROR ",error)
+    }
+    
+  }
+    
 }
 
 function shuffle(list) {
@@ -104,20 +139,34 @@ function timerOn(){
 }
 
 function resetTimer(){
-  timedoutid = setTimeout(timerOn, 60000);
+  timedoutid = setTimeout(timerOn, 600000); //60s
   clock=true;
   return timedoutid;
 }
 
 async function processVotes(contractWithSigner){
   list = shuffle(list);
-  const votesToSend = list.splice(0, list.length);
+  const votesToSend = list.splice(0, list.length); //list.length
   for(let i=0; i<votesToSend.length;i++){
+      // TIMESTAMP 1
+      const startTime1 = performance.now();
+
       const tx = await send_to_network(contractWithSigner, votesToSend[i]);
-      await tx.wait();
-      console.log("Proxy: Registered vote:", tx); // Log the sent transactions
+      //await tx.wait();
+      console.log("Proxy: Registered vote"); // Log the sent transactions
+
+      //TIMESTAMP 2
+      const endTime1 = performance.now();
+      const executionTime = endTime1 - startTime1;
+      console.log("Proxy Process Vote: ", executionTime);
+      //writeTimeToFile('proxy_processVote', executionTime, "Proxy_ProcessVote.csv");
   }
   processOpen=true;
+}
+
+function writeTimeToFile(functionName, executionTime, filename) {
+  const data = `${functionName}, ${executionTime}\n`;
+  fs.appendFileSync(filename, data);
 }
 
 async function main(){
@@ -125,7 +174,10 @@ async function main(){
   const sc_address = await find_SC_Adress();
 
   const contract = new ethers.Contract(sc_address, contractAbi, provider);
-  const contractWithSigner = contract.connect(wallet);
+  const contractWithSigner = contract.connect(wallet); //rpcnode
+  //const contractWithSigner2 = contract.connect(wallet2); //member2 
+
+  //let h = 0;
 
   var timeoutId = resetTimer(); //timedout=true
 
@@ -141,10 +193,18 @@ async function main(){
   //TIMERS
   //x em x segundos verifica nr votos
   setInterval(() => {
-    if(list.length >=3 && processOpen){
+    if(list.length >= 10 && processOpen){
+      console.log("Process Vote: > 10 Votes");
       processOpen=false;
       clearTimeout(timeoutId);
       processVotes(contractWithSigner);
+      //if(h==0){
+      //  processVotes(contractWithSigner);
+      //  h=1;
+      //} else if (h==1){
+      //  processVotes(contractWithSigner2);
+      //  h=0;
+      //}
       
       timeoutId = resetTimer();
     }
@@ -153,6 +213,13 @@ async function main(){
         console.log("Proxy: Timedout or Stopped Voting, emptying votes list...")
         processOpen = false;
         processVotes(contractWithSigner);
+        //if(h==0){
+        //  processVotes(contractWithSigner);
+        //  h=1;
+        //} else if (h==1){
+        // processVotes(contractWithSigner2);
+        //  h=0;
+        //}
       } else if(to_stop && list.length == 0 && processOpen){
         process.exit(0);
       }
@@ -163,10 +230,7 @@ async function main(){
       //TODO: send ok to stop
       process.exit(0);  
     }
-  }, 2000);
-  //Variavel clock inutil?
-
-
+  }, 3000);
 
 }
 

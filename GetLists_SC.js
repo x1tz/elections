@@ -20,14 +20,18 @@ const deployedContractAddress = "0xBca0fDc68d9b21b5bfB16D784389807017B2bbbc"; //
 async function getVotesList(provider, deployedContractAbi, deployedContractAddress){
   const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
   const res = await contract.getVotesList();
+  const len = await contract.getVotesLength();
   console.log("List is: "+ res);
+  console.log("Length: ", len);
   return res
 }
 
 async function getIdsList(provider, deployedContractAbi, deployedContractAddress){
     const contract = new ethers.Contract(deployedContractAddress, deployedContractAbi, provider);
     const res = await contract.getIdsList();
+    const len = await contract.getIdsLength();
     console.log("List is: "+ res);
+    console.log("Length: ", len);
     return res
   }
 
@@ -43,6 +47,7 @@ async function main(){
     //console.log("Use the smart contracts 'get' function to get the list of ids .. " )
     await getIdsList(provider, contractAbi, deployedContractAddress);
     }catch(error){
+      console.log(error)
       console.error("ERROR: Cannot access lists, SC status is not 'Couting'!");
     }
     // await getAllPastEvents(host, contractAbi, tx.contractAddress);
