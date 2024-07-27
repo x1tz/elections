@@ -50,14 +50,14 @@ contract electionsSC{
   }
 
 //Functions to change currentStatus(Logic: Init -> Voting -> Counting)
-  function statusVoting() public returns (Status){
+  function statusVoting() public onlyOwner returns (Status){
     require(currentStatus == Status.Init || currentStatus == Status.Voting,"Contract isn't in Init status");
     if(currentStatus == Status.Init){
       currentStatus = Status.Voting;
     }
     return currentStatus;
   }
-  function statusCounting() public returns (Status){
+  function statusCounting() public onlyOwner returns (Status){
     require(currentStatus == Status.Voting || currentStatus == Status.Counting,"Contract isn't in Voting status");
     if(currentStatus == Status.Voting){
       currentStatus = Status.Counting;
@@ -66,15 +66,10 @@ contract electionsSC{
   }
 
   // Initialize mapping with eligible voters list
-  function initializeVotersList(string[] memory keys) public onlyInit {
+  function initializeVotersList(string[] memory keys) public onlyInit onlyOwner {
     for(uint i=0; i < keys.length; i++){
         eligibleVoters[keys[i]] = 1;
     }
-  }
-
-  // Function to check the id
-  function checkId(string memory id) public view onlyVoting returns (uint) {
-    return eligibleVoters[id];
   }
  
   // Function to add an id to list
@@ -82,7 +77,7 @@ contract electionsSC{
     require(eligibleVoters[id] == 1,"The user is not eligible to vote (already voted or isn't eligible)");
     ids.push(id); //list
     eligibleVoters[id] = 2; //map
-    return true; //-> se return true nao e necessario checkID
+    return true;
   }
 
   // Function to add a vote the list

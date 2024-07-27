@@ -49,6 +49,9 @@
             <h1>Enter Your Name</h1>
             <input type="text" id="voter-name-input" placeholder="Your name">
             <button class="button" onclick="submitName()">Submit</button>
+            <div id="stopbutton">
+                <button class="button" style="background-color: red;" onclick="stopVoting()">STOP</button>
+            </div>
         </div>
 
         <div id="voting-section" class="hidden">
@@ -58,17 +61,15 @@
             </div>
             <button class="button" onclick="submitVote()">Submit Vote</button>
         </div>
-
-        <button class="button" style="background-color: red;" onclick="stopVoting()">STOP</button>
     </div>
 
     <script>
         const apiURL = 'http://127.0.0.1:8000';
         const candidates = [
-            { id: '1', name: 'Antonio Costa', img: 'antoniocosta.jpeg' },
-            { id: '2', name: 'Luis Montenegro', img: 'montenegro.jpeg' },
-            { id: '3', name: 'João Cotrim', img: 'cotrim.jpeg' },
-            { id: '4', name: 'Voto branco', img: 'blank.jpeg' }
+            { id: '1', name: 'Candidate A', img: 'candidateA.png' },
+            { id: '2', name: 'Candidate B', img: 'candidateB.png' },
+            { id: '3', name: 'Candidate C', img: 'candidateC.png' },
+            { id: '4', name: 'Blank Vote', img: 'blank.jpeg' }
         ];
 
         let voterName = '';
