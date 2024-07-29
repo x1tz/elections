@@ -79,7 +79,7 @@ function readNamesFromFile(filename) {
 }
 
 function writeTimeToFile(functionName, executionTime, filename) {
-  const data = `${functionName}, ${executionTime}\n`;
+  const data = `${executionTime}\n`;
   fs.appendFileSync(filename, data);
 }
 
@@ -90,7 +90,7 @@ async function main(){
   const sc_address = await find_SC_Adress();
   const contract = new ethers.Contract(sc_address, contractAbi, provider);
 
-  //for (let i = 0; i < 250; i++) {
+  //for (let i = 0; i < 500; i++) {
     // TIMESTAMP - 1
     const startTime = performance.now();
     
@@ -109,7 +109,7 @@ async function main(){
     // TIMESTAMP - 2
     const endTime = performance.now();
     const executionTime = endTime - startTime;
-    //console.log(executionTime);
+    console.log(executionTime);
     //writeTimeToFile('SC_InitializeEligibleVoters.js', executionTime, "sc_InitializeEligibleVoters.csv");
   //}
 }

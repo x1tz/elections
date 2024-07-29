@@ -148,7 +148,7 @@ function encrypt(text) {
 }
 
 function writeTimeToFile(functionName, executionTime, filename) {
-  const data = `${functionName}, ${executionTime}\n`;
+  const data = `${executionTime}\n`;
   fs.appendFileSync(filename, data);
 }
 
@@ -168,7 +168,7 @@ async function main(){
   const endTime1 = performance.now();
   const executionTime = endTime1 - startTime1;
   console.log("Find SC: ", executionTime);
-  writeTimeToFile('find_SC_Adress', executionTime, "VP_Find_SC.csv");
+  //writeTimeToFile('find_SC_Adress', executionTime, "VP_Find_SC.csv");
 
   
   // Smart Contrac with Signer
@@ -188,7 +188,7 @@ async function main(){
 
 
   // Change Contract Status to Voting
-  for(i=0;i<205;i++){
+  //for(i=0;i<500;i++){
 
   // TIMESTAMP - 1
   const startTime2 = performance.now();
@@ -200,9 +200,9 @@ async function main(){
   // TIMESTAMP - 2
   const endTime2 = performance.now();
   const executionTime2 = endTime2 - startTime2;
-  console.log("Find SC: ", executionTime2);
-  writeTimeToFile('change_SC_status', executionTime2, "VP_ChangeStatus.csv");
-  }
+  console.log("Status: ", executionTime2);
+  //writeTimeToFile('change_SC_status', executionTime2, "VP_ChangeStatus.csv");
+  //}
 
   // Waits for exit signal from child, turns off loop (voting) after
   var sent_stop_to_child = false;
@@ -244,7 +244,7 @@ async function main(){
           const endTime3 = performance.now();
           const executionTime3 = endTime3 - startTime3;
           console.log("Register ID: ", executionTime3);
-          //writeTimeToFile('register_id_atAddress', executionTime3, "Voting_Process.csv");
+          writeTimeToFile('register_id_atAddress', executionTime3, "VP_RegisterID.csv");
           
         } catch(error){
           //console.error("ERROR: Voter ", id," is not eligible to vote...");
@@ -264,7 +264,7 @@ async function main(){
           const endTime4 = performance.now();
           const executionTime4 = endTime4 - startTime4;
           console.log("Encrypt & Register Vote: ", executionTime4);
-          //writeTimeToFile('encrypt_register_Vote', executionTime4, "Voting_Process.csv");
+          writeTimeToFile('encrypt_register_Vote', executionTime4, "VP_Encrypt_Send_Vote.csv");
         }
 
       } else if (message.type === "stop") {
@@ -281,7 +281,7 @@ async function main(){
       const endTime5 = performance.now();
       const executionTime5 = endTime5 - startTime5;
       console.log("All Vote: ", executionTime5);
-      //writeTimeToFile('all_vote_process', executionTime5, "Voting_Process.csv");
+      writeTimeToFile('all_vote_process', executionTime5, "VP_AllProcess.csv");
       
     } catch (error) {
       console.error('Failed to parse event data:', error);

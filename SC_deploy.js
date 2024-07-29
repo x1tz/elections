@@ -26,7 +26,7 @@ async function createContract(provider, wallet, contractAbi, contractByteCode) {
 };
 
 function writeTimeToFile(functionName, executionTime, filename) {
-  const data = `${functionName}, ${executionTime}\n`;
+  const data = `${executionTime}\n`;
   fs.appendFileSync(filename, data);
 }
 
@@ -35,7 +35,7 @@ async function main(){
   const wallet = new ethers.Wallet(accountPrivateKey, provider);
 
   // LOOP FOR PROFILING
-  //for (let i = 0; i < 250; i++) {
+  //for (let i = 0; i < 500; i++) {
   try {
 
     // TIMESTAMP - TODO 1
@@ -51,7 +51,7 @@ async function main(){
     const endTime = performance.now();
     const executionTime = endTime - startTime;
     console.log(executionTime);
-    //writeTimeToFile('SC_deploy.js', executionTime, "sc_deploy.csv");
+    //writeTimeToFile("sc_deploy", executionTime, "sc_deploy.csv");
 
   } catch (error) {
     console.error('Error deploying contract:', error);

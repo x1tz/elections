@@ -159,13 +159,13 @@ async function processVotes(contractWithSigner){
       const endTime1 = performance.now();
       const executionTime = endTime1 - startTime1;
       console.log("Proxy Process Vote: ", executionTime);
-      //writeTimeToFile('proxy_processVote', executionTime, "Proxy_ProcessVote.csv");
+      writeTimeToFile("proxy_send_blockchain", executionTime, "Proxy_ProcessVote.csv");
   }
   processOpen=true;
 }
 
 function writeTimeToFile(functionName, executionTime, filename) {
-  const data = `${functionName}, ${executionTime}\n`;
+  const data = `${executionTime}\n`;
   fs.appendFileSync(filename, data);
 }
 

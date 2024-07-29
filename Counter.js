@@ -120,7 +120,7 @@ async function countVotes(){
 }
 
 function writeTimeToFile(functionName, executionTime, filename) {
-  const data = `${functionName}, ${executionTime}\n`;
+  const data = `${executionTime}\n`;
   fs.appendFileSync(filename, data);
 }
 
@@ -130,7 +130,7 @@ async function main(){
   const contractWithSigner = contract.connect(wallet);
 
   //LOOP
-  for(i=0;i<500;i++){
+  //for(i=0;i<500;i++){
 
     // TIMESTAMP - 1
     const startTime = performance.now();
@@ -148,7 +148,7 @@ async function main(){
     const executionTime = endTime - startTime;
     console.log("Decrypt & Count: ", executionTime);
     writeTimeToFile('sc_votes_decrypt_count', executionTime, "Counter.csv");
-  }
+  //}
 
   
 }
